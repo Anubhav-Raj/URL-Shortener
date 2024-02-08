@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useUser } from "../Provider/UserContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 const LoginPage = () => {
   const { login } = useUser();
@@ -84,6 +84,7 @@ const LoginPage = () => {
             Submit
           </button>
         </form>
+        <Link to="/signup">Register</Link>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const RegisterPage = () => {
@@ -102,6 +102,7 @@ const RegisterPage = () => {
             Submit
           </button>
         </form>
+        <Link to="/login">Login</Link>
       </div>
     </div>
   );
