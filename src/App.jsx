@@ -28,15 +28,11 @@ function App() {
     </>
   );
 }
-
 function ProtectedRoute() {
-  const user = localStorage.getItem("user");
-  if (
-    user.email === null ||
-    user.name === null ||
-    user._id === null ||
-    user.token === null
-  ) {
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+
+  if (!user || !user.email || !user.name || !user._id || !user.token) {
     return <Navigate to="/login" />;
   } else {
     return <Layout />;
