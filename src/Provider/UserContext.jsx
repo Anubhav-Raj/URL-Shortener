@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 import { createContext, useState, useContext, useEffect } from "react";
 
@@ -19,6 +20,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const login = (userData) => {
+    console.log(userData);
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
   };
@@ -30,7 +32,7 @@ export const UserProvider = ({ children }) => {
       token: null,
       id: null,
     });
-    localStorage.removeItem("user"); // Remove user data from localStorage
+    localStorage.removeItem("user");
   };
 
   return (

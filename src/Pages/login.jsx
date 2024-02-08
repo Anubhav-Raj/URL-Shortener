@@ -20,6 +20,7 @@ const LoginPage = () => {
           password: password,
         }
       );
+      console.log("Login successful:", response.data.user);
       if (response.data.user) {
         const userData = await login({
           name: response.data.user.name,
@@ -32,9 +33,7 @@ const LoginPage = () => {
       toast.success(response.data.message);
       navigate("/dashboard");
     } catch (error) {
-      // Handle login failure
       console.error("Login failed:", error);
-      // Display error message or take appropriate action
     }
   };
 

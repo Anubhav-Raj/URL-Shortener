@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   BrowserRouter as Router,
   Route,
@@ -13,6 +14,8 @@ import UrlShoter from "./Pages/urlShoter";
 import { UserProvider } from "./Provider/UserContext";
 
 function App() {
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
   return (
     <>
       <UserProvider>
@@ -21,22 +24,15 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<LoginPage />} />
             <Route path="/signup" element={<RegisterPage />} />
-            <Route path="/dashboard" element={<ProtectedRoute />} />
+            <Route
+              path="/dashboard"
+              element={user ? <Layout /> : <LoginPage />}
+            />
           </Routes>
         </Router>
       </UserProvider>
     </>
   );
-}
-function ProtectedRoute() {
-  const userString = localStorage.getItem("user");
-  const user = userString ? JSON.parse(userString) : null;
-
-  if (!user || !user.email || !user.name || !user._id || !user.token) {
-    return <Navigate to="/login" />;
-  } else {
-    return <Layout />;
-  }
 }
 
 function Layout() {
