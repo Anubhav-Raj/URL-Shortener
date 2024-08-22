@@ -4,17 +4,23 @@
   "description": "URLShotenerApplication",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server_shopfusion.js"
   },
   "author": "Anubhav Raj",
   "license": "ISC",
   "dependencies": {
+    "backend": "file:",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
-    "express": "^4.18.2",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",
-    "shortid": "^2.2.16"
+    "node-zookeeper-client": "^1.1.3",
+    "redis": "^4.7.0",
+    "shortid": "^2.2.16",
+    "zookeeper": "^6.2.3"
   }
 }

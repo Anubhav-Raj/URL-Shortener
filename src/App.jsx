@@ -1,11 +1,5 @@
 /* eslint-disable react/prop-types */
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
-import "./App.css";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/header";
 import Sidebar from "./components/sidebar";
 import LoginPage from "./Pages/login";

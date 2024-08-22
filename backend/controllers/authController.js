@@ -5,9 +5,12 @@ const keys = require("../config/keys");
 
 exports.register = async (req, res) => {
   try {
+    console.log(`Worker Register ${process.pid} is handling request`);
+
     const { name, email, password } = req.body;
     const user = new User({ name, email, password });
     await user.save();
+
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error(error);
@@ -17,8 +20,12 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
+    console.log(`Worker Login ${process.pid} is handling request`);
+
     const { email, password } = req.body;
+    console.log(email, password);
     const user = await User.findOne({ email });
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -27,6 +34,7 @@ exports.login = async (req, res) => {
         console.error(err);
         return res.status(500).json({ message: "Internal Server Error" });
       }
+      console.log(isMatch);
       if (isMatch) {
         const token = jwt.sign({ userId: user._id }, keys.JWT_SECRET, {
           expiresIn: "1d",

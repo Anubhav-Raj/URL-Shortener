@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState, useContext, useEffect } from "react";
 
-const UserContext = createContext();
+const UserContext = createContext(); // is  use to cretae  context provider
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
@@ -14,13 +14,13 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    //console.log(JSON.parse(storedUser));
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
   }, []);
 
   const login = (userData) => {
-    console.log(userData);
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
   };
