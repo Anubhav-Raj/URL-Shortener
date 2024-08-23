@@ -32,7 +32,10 @@ if (cluster.isPrimary) {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use((req, res, next) => {});
+  app.use((req, _, next) => {
+    console.log("body: ", req.body);
+    next();
+  });
   // for parsing application/x-www-form-urlencoded
   // app.use(express.static(path.resolve(__dirname, "./dist")));
 
