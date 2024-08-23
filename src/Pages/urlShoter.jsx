@@ -19,7 +19,7 @@ const UrlShoter = () => {
     const fetchShortUrls = async () => {
       try {
         const response = await axios.post(
-          "http://:5000/api/url/allurl",
+          "http:/http://191.96.57.27:5000/api/url/allurl",
           { userid: user.id },
           {
             headers: {
