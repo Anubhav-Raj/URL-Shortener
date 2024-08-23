@@ -4,8 +4,9 @@ const shortid = require("shortid");
 exports.shortenUrl = async (req, res) => {
   try {
     console.log(`Worker add url ${process.pid} is handling request`);
-
+    console.log(req.body);
     const { originalUrl } = req.body;
+
     let shortUrl;
     let isUnique = false;
 
@@ -40,7 +41,6 @@ exports.allshortenUrl = async (req, res) => {
     console.log(`Worker All URL ${process.pid} is handling request`);
 
     let { userid } = req.body;
-
     console.log(userid);
     const allurl = await Url.find({ userid: userid });
     console.log(allurl);
