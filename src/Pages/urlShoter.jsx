@@ -79,6 +79,7 @@ const UrlShoter = () => {
           },
         }
       );
+      console.log(response.data);
       setShortUrls((prevShortUrls) =>
         prevShortUrls.filter((url) => url._id !== id)
       );
