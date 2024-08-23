@@ -12,7 +12,7 @@ exports.shortenUrl = async (req, res) => {
     // Loop until a unique shortUrl is generated
     while (!isUnique) {
       const shortCode = shortid();
-      shortUrl = `${process.env.BASE_URL}/api/url/${shortCode}`;
+      shortUrl = `${process.env.BASE_URL}api/url/${shortCode}`;
 
       // Check if the shortUrl already exists in the database
       const existingUrl = await Url.findOne({ shortCode: shortUrl });
@@ -41,6 +41,7 @@ exports.allshortenUrl = async (req, res) => {
 
     const { userid } = req.body;
     const allurl = await Url.find({ userid: userid });
+    console.log(allurl);
     res.status(201).json({ allurl, message: "Sucessfully Created  Short URL" });
   } catch (error) {
     console.error(error);
