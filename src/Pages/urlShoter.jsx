@@ -31,6 +31,7 @@ const UrlShoter = () => {
             },
           }
         );
+        console.log(response.data);
         setShortUrls(response.data.allurl);
       } catch (error) {
         toast.error("Error fetching shortened URLs. Please try again.");
