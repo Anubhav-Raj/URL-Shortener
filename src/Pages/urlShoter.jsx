@@ -1,9 +1,11 @@
-/* eslint-disable react/jsx-no-target-blank */
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { CopyOutlined } from "@ant-design/icons";
 import { Button, Input, Modal } from "antd";
+
+// Define a global variable for the API URL
+const API_BASE_URL = "http://191.96.57.27:5000/api/url";
 
 const UrlShoter = () => {
   const [originalUrl, setOriginalUrl] = useState("");
@@ -20,7 +22,7 @@ const UrlShoter = () => {
       try {
         console.log(user.id);
         const response = await axios.post(
-          "http://191.96.57.27:5000/api/url/allurl",
+          `${API_BASE_URL}/allurl`,
           { userid: user.id },
           {
             headers: {
@@ -31,6 +33,7 @@ const UrlShoter = () => {
         );
         setShortUrls(response.data.allurl);
       } catch (error) {
+        toast.error("Error fetching shortened URLs. Please try again.");
         console.error("Error fetching shortened URLs:", error);
       }
     };
@@ -48,7 +51,7 @@ const UrlShoter = () => {
     }
     try {
       const response = await axios.post(
-        "http://191.96.57.27:5000/api/url/shorten",
+        `${API_BASE_URL}/shorten`,
         { originalUrl, userId: user.id },
         {
           headers: {
@@ -60,6 +63,7 @@ const UrlShoter = () => {
       setOriginalUrl("");
       toast.success(response.data.message);
     } catch (error) {
+      toast.error("Error shortening URL. Please try again.");
       console.error("Error shortening URL:", error);
     }
   };
@@ -67,7 +71,7 @@ const UrlShoter = () => {
   const handleDelete = async (id) => {
     try {
       const response = await axios.post(
-        "http://191.96.57.27:5000/api/url/deleteurl",
+        `${API_BASE_URL}/deleteurl`,
         { id: id },
         {
           headers: {
@@ -80,7 +84,8 @@ const UrlShoter = () => {
       );
       toast.success(response.data.message);
     } catch (error) {
-      console.error("Error To Delete URL:", error);
+      toast.error("Error deleting URL. Please try again.");
+      console.error("Error deleting URL:", error);
     }
   };
 
@@ -122,12 +127,11 @@ const UrlShoter = () => {
     setUrlIdToEdit(null);
   };
 
-  // Function to handle updating the original URL
   const handleUpdateUrl = async () => {
     console.log(urlIdToEdit, originalUrl);
     try {
       const response = await axios.post(
-        "http://191.96.57.27:5000/api/url/updateurl",
+        `${API_BASE_URL}/updateurl`,
         { id: urlIdToEdit, updateUrl: originalUrl },
         {
           headers: {
@@ -143,6 +147,7 @@ const UrlShoter = () => {
       toast.success(response.data.message);
       closeEditModal();
     } catch (error) {
+      toast.error("Error updating URL. Please try again.");
       console.error("Error updating URL:", error);
     }
   };
@@ -164,7 +169,7 @@ const UrlShoter = () => {
               type="url"
               id="originalUrl"
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-dark-purple"
-              placeholder="Enter your email"
+              placeholder="Enter the original URL"
               value={originalUrl}
               onChange={(e) => setOriginalUrl(e.target.value)}
               required
@@ -224,6 +229,7 @@ const UrlShoter = () => {
                       <a
                         href={url.shortCode}
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="underline"
                       >
                         {url.shortCode}
