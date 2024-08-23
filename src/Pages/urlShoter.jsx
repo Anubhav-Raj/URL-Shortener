@@ -20,7 +20,7 @@ const UrlShoter = () => {
       try {
         console.log(user.id);
         const response = await axios.post(
-          "http://191.96.57.27:5000/api/url/allurl",
+          "https://191.96.57.27:5000/api/url/allurl",
           { userid: user.id },
           {
             headers: {
