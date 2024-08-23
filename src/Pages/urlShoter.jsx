@@ -18,6 +18,7 @@ const UrlShoter = () => {
   useEffect(() => {
     const fetchShortUrls = async () => {
       try {
+        console.log(user.id);
         const response = await axios.post(
           "http://191.96.57.27:5000/api/url/allurl",
           { userid: user.id },
