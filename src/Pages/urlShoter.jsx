@@ -6,6 +6,7 @@ import { Button, Input, Modal } from "antd";
 
 // Define a global variable for the API URL
 const API_BASE_URL = "http://191.96.57.27:5000/api/url";
+//const API_BASE_URL = "http://localhost:5000/api/url";
 
 const UrlShoter = () => {
   const [originalUrl, setOriginalUrl] = useState("");
@@ -16,7 +17,7 @@ const UrlShoter = () => {
   const userString = localStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
   const token = user ? user.token : null;
-
+  conole.log("Anubhav");
   useEffect(() => {
     const fetchShortUrls = async () => {
       console.log(user);
