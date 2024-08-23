@@ -19,8 +19,9 @@ const UrlShoter = () => {
 
   useEffect(() => {
     const fetchShortUrls = async () => {
+      console.log(user);
+      console.log(user.id);
       try {
-        console.log(user.id);
         const response = await axios.post(
           `${API_BASE_URL}/allurl`,
           { userid: user.id },
