@@ -69,7 +69,7 @@ exports.redirectUrl = async (req, res) => {
 
     const { shortCode } = req.params;
     const url = await Url.findOneAndUpdate(
-      { shortCode: `${process.env.BASE_URL}/api/url/${shortCode}` },
+      { shortCode: `${process.env.BASE_URL}api/url/${shortCode}` },
       { $push: { clicks: { timestamp: Date.now() } } },
       { new: true }
     );
