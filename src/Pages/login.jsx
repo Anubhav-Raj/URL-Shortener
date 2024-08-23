@@ -14,7 +14,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "http://191.96.57.27:5000/api/auth/login",
         {
           email: email,
           password: password,

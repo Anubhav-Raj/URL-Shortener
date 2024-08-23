@@ -19,7 +19,7 @@ const UrlShoter = () => {
     const fetchShortUrls = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/url/allurl",
+          "http://:5000/api/url/allurl",
           { userid: user.id },
           {
             headers: {
@@ -46,7 +46,7 @@ const UrlShoter = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/url/shorten",
+        "http://191.96.57.27:5000/api/url/shorten",
         { originalUrl, userId: user.id },
         {
           headers: {
@@ -65,7 +65,7 @@ const UrlShoter = () => {
   const handleDelete = async (id) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/url/deleteurl",
+        "http://191.96.57.27:5000/api/url/deleteurl",
         { id: id },
         {
           headers: {
@@ -125,7 +125,7 @@ const UrlShoter = () => {
     console.log(urlIdToEdit, originalUrl);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/url/updateurl",
+        "http://191.96.57.27:5000/api/url/updateurl",
         { id: urlIdToEdit, updateUrl: originalUrl },
         {
           headers: {

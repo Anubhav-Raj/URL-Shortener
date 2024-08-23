@@ -10,7 +10,7 @@ const EditUrlForm = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/url/${urlId}`,
+        `http://191.96.57.27:5000/api/url/${urlId}`,
         {
           updatedUrl,
         }
