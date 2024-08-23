@@ -17,7 +17,7 @@ const UrlShoter = () => {
   const userString = localStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
   const token = user ? user.token : null;
-  conole.log("Anubhav");
+  console.log("Anubhav");
   useEffect(() => {
     const fetchShortUrls = async () => {
       console.log(user);
