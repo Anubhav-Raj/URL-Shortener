@@ -39,7 +39,9 @@ exports.allshortenUrl = async (req, res) => {
   try {
     console.log(`Worker All URL ${process.pid} is handling request`);
 
-    const { userid } = req.body;
+    let { userid } = req.body;
+
+    console.log(userid);
     const allurl = await Url.find({ userid: userid });
     console.log(allurl);
     res.status(201).json({ allurl, message: "Sucessfully Created  Short URL" });

@@ -31,7 +31,7 @@ if (cluster.isPrimary) {
   app.use(cors());
   app.use(express.json());
 
-  app.use(express.static(path.resolve(__dirname, "./dist")));
+  // app.use(express.static(path.resolve(__dirname, "./dist")));
 
   // Routes
   app.get("/home", (req, res) => {
@@ -54,13 +54,13 @@ if (cluster.isPrimary) {
 
   app.use("/api/auth", require("./routes/authRoutes"));
   app.use("/api/url", require("./routes/urlRoutes"));
-  app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "/dist", "index.html"), (err) => {
-      if (err) {
-        res.status(500).send(err);
-      }
-    });
-  });
+  // app.get("/*", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "/dist", "index.html"), (err) => {
+  //     if (err) {
+  //       res.status(500).send(err);
+  //     }
+  //   });
+  // });
 
   // Start the server
   const PORT = process.env.PORT || 5000;
