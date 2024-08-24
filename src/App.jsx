@@ -1,9 +1,7 @@
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
+
 import LoginPage from "./Pages/login.jsx";
 import RegisterPage from "./Pages/register.jsx";
-import UrlShoter from "./Pages/urlShoter.jsx";
 import Mainpage from "./Pages/mainPage.jsx";
 import PageTemplate from "./Pages/page.jsx";
 
