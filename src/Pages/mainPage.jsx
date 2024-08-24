@@ -245,7 +245,7 @@ const Mainpage = () => {
                           className="text-blue-400 hover:underline"
                           style={{ maxWidth: "300px" }}
                         >
-                          {`${url.shortCode}`}
+                          {`http://techfestsliet.org:5000/api/url/${url.shortCode}`}
                         </a>
                       </td>
                       <td
