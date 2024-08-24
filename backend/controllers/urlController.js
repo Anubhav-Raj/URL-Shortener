@@ -4,7 +4,7 @@ const shortid = require("shortid");
 exports.shortenUrl = async (req, res) => {
   try {
     console.log(`Worker add url ${process.pid} is handling request`);
-    console.log(req.body);
+
     const { originalUrl } = req.body;
     if (!originalUrl) {
       return res.status(400).json({ error: "Original URL is required" });
