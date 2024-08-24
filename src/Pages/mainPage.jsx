@@ -239,7 +239,7 @@ const Mainpage = () => {
 
                       <td className="py-3 px-6 break-words max-w-xs">
                         <a
-                          href={`${url.shortCode}`}
+                          href={`http://techfestsliet.org:5000/api/url/${url.shortCode}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-400 hover:underline"
