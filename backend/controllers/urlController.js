@@ -86,7 +86,7 @@ exports.redirectUrl = async (req, res) => {
       },
       { new: true } // Return the updated document
     );
-
+    console.log(" this  url ", url);
     if (!url) {
       return res.status(404).json({ message: "URL not found" });
     }
