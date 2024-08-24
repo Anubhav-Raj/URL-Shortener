@@ -75,6 +75,8 @@ exports.redirectUrl = async (req, res) => {
 
     const { shortCode } = req.params;
 
+    console.log(" this shortCode ", shortCode);
+
     // Find the URL by shortCode and increment the clicks counter
     const url = await Url.findOneAndUpdate(
       { shortCode }, // Query by shortCode directly
@@ -88,6 +90,7 @@ exports.redirectUrl = async (req, res) => {
     if (!url) {
       return res.status(404).json({ message: "URL not found" });
     }
+    console.log(" this  url ", url);
 
     // Redirect to the original URL
     res.redirect(url.originalUrl);
