@@ -12,14 +12,15 @@ const UrlSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  clicks: [
-    {
-      timestamp: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
+  clicks: {
+    type: Number,
+    default: 0,
+  },
+  status: {
+    type: String,
+    default: "active",
+    enum: ["active", "inactive"],
+  },
   userid: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

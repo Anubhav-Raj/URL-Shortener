@@ -2,7 +2,24 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "gradient-text":
+          "linear-gradient(to right, #144EE3, #EB568E, #A353AA, #144EE3)",
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          ".bg-clip-text": {
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+          },
+        },
+        ["responsive", "hover"]
+      );
+    },
+  ],
 };
