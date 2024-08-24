@@ -16,7 +16,7 @@ exports.shortenUrl = async (req, res) => {
     // Loop until a unique shortUrl is generated
     while (!isUnique) {
       const shortCode = shortid();
-      shortUrl = `${process.env.BASE_URL}api/url/${shortCode}`;
+      shortUrl = `${shortCode}`;
 
       // Check if the shortUrl already exists in the database
       const existingUrl = await Url.findOne({ shortCode: shortUrl });
@@ -41,12 +41,12 @@ exports.shortenUrl = async (req, res) => {
 };
 exports.allshortenUrl = async (req, res) => {
   try {
-    console.log(`Worker All URL ${process.pid} is handling request`);
+    // console.log(`Worker All URL ${process.pid} is handling request`);
 
     let { userid } = req.body;
-    console.log(userid);
+    // console.log(userid);
     const allurl = await Url.find({ userid: userid });
-    console.log(allurl);
+    // console.log(allurl);
     res.status(201).json({ allurl, message: "Sucessfully Created  Short URL" });
   } catch (error) {
     console.error(error);
@@ -74,7 +74,7 @@ exports.redirectUrl = async (req, res) => {
     console.log(`Worker A Redirect URL ${process.pid} is handling request`);
 
     const { shortCode } = req.params;
-
+    console.log("Anubhav");
     console.log(" this shortCode ", req.params);
 
     // Find the URL by shortCode and increment the clicks counter

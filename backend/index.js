@@ -3,7 +3,7 @@
 const cluster = require("cluster");
 const os = require("os");
 const express = require("express");
-
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/mongoose.js"); // Database connection module
@@ -12,7 +12,6 @@ const numCPUs = os.availableParallelism();
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
-  keyGenerator: (req) => req.ip,
 });
 
 if (cluster.isPrimary) {
@@ -29,7 +28,7 @@ if (cluster.isPrimary) {
   app.use(limiter);
 
   connectDB();
-  app.set("trust proxy", 1);
+
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -43,6 +42,23 @@ if (cluster.isPrimary) {
   // app.use(express.static(path.resolve(__dirname, "./dist")));
 
   // Routes
+  app.get("/home", (req, res) => {
+    console.log(`Worker ${process.pid} is handling request`);
+    let i = 0;
+
+    // Simulate heavy computation
+    setTimeout(() => {
+      while (i < 100000000000) {
+        i++;
+      }
+      res.send(`Welcome to our Homepage from worker ${process.pid}`);
+    }, 0); // Non-blocking heavy computation
+  });
+
+  app.get("/home2", (req, res) => {
+    console.log(`Worker ${process.pid} is handling request`);
+    res.send(`Welcome to our Homepage2 from worker ${process.pid}`);
+  });
 
   app.use("/api/auth", require("./routes/authRoutes"));
   app.use("/api/url", require("./routes/urlRoutes"));
