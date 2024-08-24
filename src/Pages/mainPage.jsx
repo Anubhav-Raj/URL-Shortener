@@ -65,7 +65,7 @@ const Mainpage = () => {
         }
       );
       setShortUrls((prevShortUrls) => [...prevShortUrls, response.data.url]);
-      setOriginalUrl("");
+      setOriginalUrl(""); // Reset the input field after submission
       toast.success(response.data.message);
     } catch (error) {
       toast.error("Error shortening URL. Please try again.");
@@ -74,6 +74,11 @@ const Mainpage = () => {
   };
 
   const handleDelete = async (id) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this URL?"
+    );
+    if (!confirmed) return;
+
     try {
       const response = await axios.post(
         `${API_BASE_URL}/deleteurl`,
@@ -167,11 +172,11 @@ const Mainpage = () => {
     <div className="min-h-screen bg-[#0B101B] text-white">
       <div className="bg-no-repeat bg-center bg-cover bg-[url('../assets/bg.png')] min-h-screen">
         <div className="bg-gray-900 min-h-screen flex flex-col items-center text-white">
-          <header className="w-full py-4 px-8 flex justify-between items-center">
+          <header className="w-full py-4 px-8 flex flex-col md:flex-row justify-between items-center">
             <div className="text-4xl font-bold bg-gradient-to-r from-[#EB568E] via-[#144EE3] to-[#EB568E] text-transparent bg-clip-text">
               Linkly
             </div>
-            <div className="flex items-center space-x-4 w-full max-w-4xl px-4">
+            <div className="flex items-center space-x-4 w-full max-w-4xl px-4 mt-4 md:mt-0">
               <form
                 onSubmit={handleSubmit}
                 className="flex flex-col md:flex-row items-center w-full bg-gray-800 rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105"
@@ -192,7 +197,7 @@ const Mainpage = () => {
               </form>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 mt-4 md:mt-0">
               <div className="relative">
                 <button className="flex items-center bg-gray-800 text-gray-300 px-4 py-2 rounded-lg">
                   <span className="mr-2">Welcome, {user?.name}</span>
@@ -204,7 +209,7 @@ const Mainpage = () => {
             </div>
           </header>
 
-          <main className="w-4/5 mt-8 px-8">
+          <main className="w-full md:w-4/5 mt-8 px-8">
             <div className="overflow-x-auto">
               <table className="min-w-full bg-transparent rounded-lg shadow-lg">
                 <thead>
@@ -243,7 +248,15 @@ const Mainpage = () => {
                           {`${url.shortCode}`}
                         </a>
                       </td>
-                      <td className="py-3 px-6">{url.status}</td>
+                      <td
+                        className={`py-3 px-6 ${
+                          url.status === "active"
+                            ? "text-green-400"
+                            : "text-red-400"
+                        }`}
+                      >
+                        {url.status}
+                      </td>
                       <td className="py-3 px-6">{url.clicks || 0}</td>
                       <td className="py-3 px-6">
                         <QRCode value={url.originalUrl} size={50} />

@@ -74,14 +74,22 @@ exports.redirectUrl = async (req, res) => {
     console.log(`Worker A Redirect URL ${process.pid} is handling request`);
 
     const { shortCode } = req.params;
+
+    // Find the URL by shortCode and increment the clicks counter
     const url = await Url.findOneAndUpdate(
-      { shortCode: `${process.env.BASE_URL}api/url/${shortCode}` },
-      { $push: { clicks: { timestamp: Date.now() } } },
-      { new: true }
+      { shortCode }, // Query by shortCode directly
+      {
+        $inc: { clicks: 1 }, // Increment the clicks counter by 1
+        $push: { clickDetails: { timestamp: Date.now() } }, // Optional: Push a timestamp to an array if you are tracking clicks with timestamps
+      },
+      { new: true } // Return the updated document
     );
+
     if (!url) {
       return res.status(404).json({ message: "URL not found" });
     }
+
+    // Redirect to the original URL
     res.redirect(url.originalUrl);
   } catch (error) {
     console.error(error);

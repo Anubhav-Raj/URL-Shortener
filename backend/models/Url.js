@@ -16,6 +16,14 @@ const UrlSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  clickDetails: [
+    {
+      timestamp: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
   status: {
     type: String,
     default: "active",
