@@ -3,7 +3,7 @@
 const cluster = require("cluster");
 const os = require("os");
 const express = require("express");
-const bodyParser = require("body-parser");
+
 const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/mongoose.js"); // Database connection module

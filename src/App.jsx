@@ -1,4 +1,9 @@
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 import LoginPage from "./Pages/login.jsx";
 import RegisterPage from "./Pages/register.jsx";
@@ -18,10 +23,14 @@ function App() {
           <Route path="/page" element={<PageTemplate />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={<PageTemplate />} />
+          <Route
+            path="/"
+            element={user ? <Navigate to="/dashboard" /> : <PageTemplate />}
+          />
+
           <Route
             path="/dashboard"
-            element={user ? <Layout /> : <LoginPage />}
+            element={user ? <Layout /> : <Navigate to="/login" />}
           />
         </Routes>
       </Router>

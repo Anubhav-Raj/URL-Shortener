@@ -75,7 +75,7 @@ exports.redirectUrl = async (req, res) => {
 
     const { shortCode } = req.params;
 
-    console.log(" this shortCode ", shortCode);
+    console.log(" this shortCode ", req.params);
 
     // Find the URL by shortCode and increment the clicks counter
     const url = await Url.findOneAndUpdate(
