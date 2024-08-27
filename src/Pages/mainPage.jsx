@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClipboard, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClipboard,
+  faPen,
+  faTrash,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import QRCode from "qrcode.react";
 
@@ -158,7 +163,11 @@ const Mainpage = () => {
       console.error("Error updating URL:", error);
     }
   };
-
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    toast.success("Logged out successfully");
+    history.push("/login"); // Redirect to login page
+  };
   const getStatusCounts = () => {
     return shortUrls.reduce((counts, url) => {
       counts[url.status] = (counts[url.status] || 0) + 1;
@@ -204,6 +213,13 @@ const Mainpage = () => {
                   <span className="bg-blue-600 text-white px-2 py-1 rounded-full">
                     {shortUrls.length}
                   </span>
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="text-red-400 hover:text-red-300"
+                  title="Logout"
+                >
+                  <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
                 </button>
               </div>
             </div>
